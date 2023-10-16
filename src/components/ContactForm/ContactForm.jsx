@@ -1,8 +1,9 @@
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { Formik, Field, ErrorMessage } from 'formik';
 import { nanoid } from 'nanoid';
 import { object, string } from 'yup';
 import 'yup-phone-lite';
+import { addContact } from 'redux/contactsSlice';
 
 import { FormikForm } from './ContactForm.styled';
 
@@ -13,7 +14,9 @@ const contactSchema = object().shape({
     .required('Required field!'),
 });
 
-export const ContactForm = ({ onSaveContact }) => {
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+
   return (
     <div>
       <h1>Phonebook</h1>
@@ -21,7 +24,7 @@ export const ContactForm = ({ onSaveContact }) => {
         initialValues={{ name: '', number: '' }}
         validationSchema={contactSchema}
         onSubmit={(values, actions) => {
-          onSaveContact({ id: nanoid(), ...values });
+          dispatch(addContact({ id: nanoid(), ...values }));
           actions.resetForm();
         }}
       >
@@ -45,8 +48,4 @@ export const ContactForm = ({ onSaveContact }) => {
       </Formik>
     </div>
   );
-};
-
-ContactForm.propTypes = {
-  onSaveContact: PropTypes.func.isRequired,
 };

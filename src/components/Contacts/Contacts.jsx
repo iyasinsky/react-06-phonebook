@@ -1,14 +1,14 @@
+import { useSelector } from 'react-redux';
 import { ContactsList } from '../ContactList/ContactList';
 import { Filter } from '../Filter/Filter';
 
-export const Contacts = ({ contacts, value, onChange, onDelete }) => {
+export const Contacts = () => {
+  const contacts = useSelector(state => state.contacts);
   return (
     <div>
       <h2>Contacts</h2>
-      <Filter value={value} onChange={onChange} />
-      {contacts.length ? (
-        <ContactsList contacts={contacts} onDelete={onDelete} />
-      ) : null}
+      <Filter />
+      {contacts.length ? <ContactsList /> : null}
     </div>
   );
 };
