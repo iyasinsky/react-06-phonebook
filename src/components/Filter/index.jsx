@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { filterValue } from 'redux/filterSlice';
-import { Label } from './Filter.styled';
+import { filterValue } from 'redux/FilterSlice';
+import { Label } from './index.styled';
 
 export const Filter = () => {
   const value = useSelector(state => state.filter);
